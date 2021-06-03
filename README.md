@@ -1,2 +1,3 @@
-# programming-exercises
+# Programming Exercises
+
 Short coding exercises.
