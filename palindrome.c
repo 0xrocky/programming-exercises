@@ -1,29 +1,29 @@
-//Programma che legge una stringa terminata da un punto e stabilisce main(void){} se è palindroma
+//programma che, con due puntatori, stabilisce se n parole da linea di comando sono palindrome o meno
 
+#include <string.h>
 #include <stdio.h>
-#define L 100
 
-int main(void){
-	printf("Inserisci una stringa terminata dal . \n");
-	int i = 0, j;
-	char ch, arr[L] = {};
-	while( ( ch = getchar() ) != '.' ){
-		arr[i] = ch;
-		i++;
-	}
-	i--; //decremento la i perchè viene ugualmente incrementata prima di uscire dal ciclo while
-	printf("La stringa \"");
-	for( j = 0; j <= i; j++ )
-		printf("%c", arr[j] );
+typedef char *String;
 
-	j = 0; //resetto j
-	while( j < i ){
-		if( arr[j] != arr[i] ){
-			printf("\" non è palindroma\n");
-			return 0;
-		}
-		i--; j++;
+int palindroma( char *p, char *q ){
+	while( p < q ){
+		if( (*p) != (*q) ) return 0;
+		p++; q--;
 	}
-	printf("\" è  palindroma\n");
+	return 1;
+}
+
+int main( int argc, char *argv[] ){
+	int i;
+	char *p, *q;
+	String corr;
+	for( i = 1; i < argc; i++ ){
+		corr = argv[ i ];
+		p = corr;// = &corr[0]
+		q = p + ( strlen(corr) - 1 );// = &corr[fine]
+		if( palindroma( p, q ) == 0 ) printf("%s non palindroma", corr );
+		else printf("%s palindroma", corr );
+	}
+	printf("\n");
 	return 0;
 }
